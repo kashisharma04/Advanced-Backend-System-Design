@@ -7,7 +7,7 @@ import { connectRedis } from "./redis.js";
 import { loggerMiddleware } from "./middleware/logger.js";
 import { notFoundHandler, errorHandler } from "./middleware/errorHandler.js";
 import routes from "./routes.js";
-
+// app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
