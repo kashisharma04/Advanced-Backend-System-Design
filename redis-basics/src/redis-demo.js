@@ -1,3 +1,14 @@
+// Redis is an in-memory database used mainly for caching, session storage, counters, queues, and fast data access.
+// Redis stores: KEY → VALUE
+// Redis Download: https://github.com/microsoftarchive/redis/releases?utm_source=chatgpt.com
+
+// Command	Purpose	Example
+// SET	:- Store a value	SET 
+// GET :- Read a value	GET 
+// DEL :-	Delete a key	DEL
+// EXISTS	:- Check if a key exists	EXISTS 
+// SET ... EX	:-Store with expiry
+
 // Import the redis library
 const { createClient } = require('redis');
 
@@ -43,3 +54,17 @@ async function main() {
 
 // Run the main function
 main();
+
+
+
+// Example-2
+// Store OTP for 30 seconds
+await client.set("otp", "123456", {
+    EX: 30
+});
+
+// Read OTP
+const otp = await client.get("otp");
+console.log(otp);
+
+
