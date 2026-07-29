@@ -1,0 +1,21 @@
+{
+  "name": "student-management-api",
+  "version": "1.0.0",
+  "description": "Simple Node.js backend using Express.js, SQLite, and Redis",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "event-loop": "node src/eventLoop.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3",
+    "nodemon": "^3.1.14",
+    "redis": "^4.6.13",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "uuid": "^9.0.1"
+  }
+}
