@@ -1,0 +1,20 @@
+{
+  "name": "node-redis-sqlite-beginner-demo",
+  "version": "1.0.0",
+  "description": "Beginner-friendly Node.js project demonstrating Express, SQLite, and Redis",
+  "main": "cache-demo.js",
+  "scripts": {
+    "redis-demo": "node redis-demo.js",
+    "sqlite-demo": "node sqlite-demo.js",
+    "express-sqlite": "node express-sqlite.js",
+    "express-redis": "node express-redis.js",
+    "cache-demo": "node cache-demo.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.0",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "nodemon": "^3.1.14",
+    "redis": "^4.7.0"
+  }
+}
