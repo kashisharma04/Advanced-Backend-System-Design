@@ -68,3 +68,53 @@ const otp = await client.get("otp");
 console.log(otp);
 
 
+
+
+// Product cache example code - 2
+async function main(){
+
+    await client.connect();
+
+    const product = {
+        name:"Laptop",
+        price:50000
+    };
+
+
+    await client.set(
+        "product:1",
+        JSON.stringify(product)
+    );
+
+
+    const data = await client.get("product:1");
+
+
+    console.log(JSON.parse(data));
+
+
+    await client.quit();
+}
+
+main();
+
+// User session code-3:
+async function main(){
+
+    await client.connect();
+
+    await client.set(
+        "session:user101",
+        "logged_in"
+    );
+
+    const session = await client.get(
+        "session:user101"
+    );
+
+    console.log(session);
+
+    await client.quit();
+}
+
+main();

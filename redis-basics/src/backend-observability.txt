@@ -1,0 +1,110 @@
+1. What is Observability?
+
+
+"Your backend is running in production. A user says: 'My payment failed.' How will you know what happened?"
+
+You cannot see the user's computer.
+
+You need information from your system.
+
+That information is called observability.
+
+Simple definition:
+
+Observability means understanding what is happening inside a system by looking at its outputs like logs, errors, and performance data.
+
+Three main parts of Observability
+
+
+          Observability
+
+               |
+    -------------------------
+    |           |           |
+  Logs       Metrics     Traces
+
+    1. Logs : Tell: "What happened?"
+  eg: User login successful
+      Payment completed
+      Database error
+
+    2. Metrics: Numbers about the system.
+
+  eg:CPU usage: 70%
+     Requests per second: 500
+     Response time: 200ms
+
+     3. Traces: Track one request through different services.
+ eg:
+User Request
+
+   |
+Auth Service
+
+   |
+Payment Service
+
+   |
+Database
+
+
+
+
+
+2. What is Logging?
+
+Simple definition: Logging means recording important events happening inside an application.
+
+
+Winston Package : "Winston is a Node.js logging library used to create professional logs."
+
+npm install winston
+-------------
+
+const winston = require("winston");
+
+const logger = winston.createLogger({
+    level: "info",
+    transports: [
+        new winston.transports.Console()
+    ]
+});
+
+logger.info("Server Started");
+
+logger.error("Database Connection Failed");
+-------------
+output:
+info: Server Started
+
+error: Database Connection Failed
+
+Real-time example
+-------------------------------
+
+app.post("/login",(req,res)=>{
+
+    logger.info("Login request received");
+
+    if(!user){
+        logger.error("User not found");
+    }
+
+});
+
+
+Activity: 
+
+"Which log level will you use?"
+
+1. Server started
+Answer: INFO
+
+2. Payment failed
+Answer: ERROR
+
+3. Database is responding slowly
+Answer: WARN
+
+4. Need detailed developer debugging
+Answer: DEBUG
