@@ -43,3 +43,22 @@ cron.schedule('* * * * *', () => {
 cron.schedule("*/2 * * * *", () => {
     console.log("Running Every 2 Minutes");
 });
+
+// every 2 hours
+cron.schedule("0 */2 * * *", () => {
+    console.log("Runs every 2 hours");
+});
+
+// Every day at 6:30 PM
+cron.schedule("30 18 * * *", () => {
+    console.log("Sending Daily Sales Report");
+});
+// Every friday at 5:00 PM
+cron.schedule("0 17 * * 5", () => {
+    console.log("Weekly Report Sent");
+});
+
+// On the 1st day of every month
+cron.schedule("0 9 1 * *", () => {
+    console.log("Generating Monthly Salary Slips");
+});
