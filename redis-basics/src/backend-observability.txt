@@ -58,6 +58,10 @@ Simple definition: Logging means recording important events happening inside an 
 
 Winston Package : "Winston is a Node.js logging library used to create professional logs."
 
+Logging is a critical part of any application. It helps with debugging, monitoring, and maintaining your code. Winston is one of the most popular logging libraries for Node.js due to its flexibility and feature-rich capabilities.
+
+Winston package : https://bjprajapati.medium.com/using-winston-for-logging-in-node-js-applications-d15302947c28
+
 npm install winston
 -------------
 

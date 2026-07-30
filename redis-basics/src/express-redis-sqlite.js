@@ -24,9 +24,9 @@ redis.on("error", (err) => {
 
 // Connect Redis
 redis.connect()
-.then(() => {
-    console.log("Redis Connected");
-});
+    .then(() => {
+        console.log("Redis Connected");
+    });
 
 
 // Middleware
@@ -52,20 +52,17 @@ CREATE TABLE IF NOT EXISTS students(
 // CREATE STUDENT
 // ===============================
 
-app.post("/students", async(req,res)=>{
+app.post("/students", async (req, res) => {
 
 
-    const {name, age} = req.body;
-
+    const { name, age } = req.body;
 
     // Insert into SQLite
-
     const stmt = db.prepare(
         "INSERT INTO students(name, age) VALUES(?,?)"
     );
 
-
-    const result = stmt.run(name,age);
+    const result = stmt.run(name, age);
 
 
 
@@ -95,7 +92,7 @@ app.post("/students", async(req,res)=>{
 // ===============================
 
 
-app.get("/students", async(req,res)=>{
+app.get("/students", async (req, res) => {
 
 
     // 1. Check Redis first
@@ -104,7 +101,7 @@ app.get("/students", async(req,res)=>{
 
 
 
-    if(cachedStudents){
+    if (cachedStudents) {
 
 
         console.log("Data from Redis");
@@ -112,8 +109,8 @@ app.get("/students", async(req,res)=>{
 
         return res.json({
 
-            source:"Redis",
-            data:JSON.parse(cachedStudents)
+            source: "Redis",
+            data: JSON.parse(cachedStudents)
 
         });
 
@@ -128,8 +125,8 @@ app.get("/students", async(req,res)=>{
 
 
     const students = db
-    .prepare("SELECT * FROM students")
-    .all();
+        .prepare("SELECT * FROM students")
+        .all();
 
 
 
@@ -142,7 +139,7 @@ app.get("/students", async(req,res)=>{
         JSON.stringify(students),
 
         {
-            EX:60
+            EX: 60
         }
 
     );
@@ -151,8 +148,8 @@ app.get("/students", async(req,res)=>{
 
     res.json({
 
-        source:"SQLite",
-        data:students
+        source: "SQLite",
+        data: students
 
     });
 
@@ -168,7 +165,7 @@ app.get("/students", async(req,res)=>{
 // ===============================
 
 
-app.get("/students/:id", async(req,res)=>{
+app.get("/students/:id", async (req, res) => {
 
 
     const id = req.params.id;
@@ -184,12 +181,12 @@ app.get("/students/:id", async(req,res)=>{
 
 
 
-    if(cachedStudent){
+    if (cachedStudent) {
 
         return res.json({
 
-            source:"Redis",
-            data:JSON.parse(cachedStudent)
+            source: "Redis",
+            data: JSON.parse(cachedStudent)
 
         });
 
@@ -201,19 +198,19 @@ app.get("/students/:id", async(req,res)=>{
     // Get from SQLite
 
     const student = db
-    .prepare(
-        "SELECT * FROM students WHERE id=?"
-    )
-    .get(id);
+        .prepare(
+            "SELECT * FROM students WHERE id=?"
+        )
+        .get(id);
 
 
 
-    if(!student){
+    if (!student) {
 
         return res.status(404)
-        .json({
-            message:"Student not found"
-        });
+            .json({
+                message: "Student not found"
+            });
 
     }
 
@@ -229,7 +226,7 @@ app.get("/students/:id", async(req,res)=>{
         JSON.stringify(student),
 
         {
-            EX:60
+            EX: 60
         }
 
     );
@@ -238,8 +235,8 @@ app.get("/students/:id", async(req,res)=>{
 
     res.json({
 
-        source:"SQLite",
-        data:student
+        source: "SQLite",
+        data: student
 
     });
 
@@ -255,33 +252,33 @@ app.get("/students/:id", async(req,res)=>{
 // ===============================
 
 
-app.put("/students/:id", async(req,res)=>{
+app.put("/students/:id", async (req, res) => {
 
 
-    const {name,age}=req.body;
+    const { name, age } = req.body;
 
 
-    const id=req.params.id;
+    const id = req.params.id;
 
 
 
-    const stmt=db.prepare(
+    const stmt = db.prepare(
 
         "UPDATE students SET name=?, age=? WHERE id=?"
 
     );
 
 
-    const result=stmt.run(name,age,id);
+    const result = stmt.run(name, age, id);
 
 
 
-    if(result.changes===0){
+    if (result.changes === 0) {
 
         return res.status(404)
-        .json({
-            message:"Student not found"
-        });
+            .json({
+                message: "Student not found"
+            });
 
     }
 
@@ -297,7 +294,7 @@ app.put("/students/:id", async(req,res)=>{
 
     res.json({
 
-        message:"Student updated"
+        message: "Student updated"
 
     });
 
@@ -313,28 +310,28 @@ app.put("/students/:id", async(req,res)=>{
 // ===============================
 
 
-app.delete("/students/:id", async(req,res)=>{
+app.delete("/students/:id", async (req, res) => {
 
 
-    const id=req.params.id;
+    const id = req.params.id;
 
 
 
-    const result=db.prepare(
+    const result = db.prepare(
 
         "DELETE FROM students WHERE id=?"
 
     )
-    .run(id);
+        .run(id);
 
 
 
-    if(result.changes===0){
+    if (result.changes === 0) {
 
         return res.status(404)
-        .json({
-            message:"Student not found"
-        });
+            .json({
+                message: "Student not found"
+            });
 
     }
 
@@ -350,7 +347,7 @@ app.delete("/students/:id", async(req,res)=>{
 
     res.json({
 
-        message:"Student deleted"
+        message: "Student deleted"
 
     });
 
@@ -363,7 +360,7 @@ app.delete("/students/:id", async(req,res)=>{
 
 // Start server
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
 
     console.log(
         "Server running on http://localhost:3000"
