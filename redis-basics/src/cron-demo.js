@@ -37,3 +37,9 @@ cron.schedule('* * * * *', () => {
 // every hour "0 * * * *"
 // every day at 9 am :-> "0 9 * * *"
 // every sunday "0 9 * * 0"
+// Every 2 minutes : */2 * * * *
+
+// every 2 min
+cron.schedule("*/2 * * * *", () => {
+    console.log("Running Every 2 Minutes");
+});
